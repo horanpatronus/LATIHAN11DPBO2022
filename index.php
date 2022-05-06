@@ -23,7 +23,7 @@ if (isset($_POST['add'])) {
 }
 
 if (!empty($_GET['id_hapus'])) {
-    //memanggil add
+    //memanggil delete
     $id = $_GET['id_hapus'];
 
     $buku->delete($id);
@@ -31,7 +31,7 @@ if (!empty($_GET['id_hapus'])) {
 }
 
 if (!empty($_GET['id_edit'])) {
-    //memanggil add
+    //update status buku
     $id = $_GET['id_edit'];
 
     $buku->statusBuku($id);
@@ -42,6 +42,7 @@ $data = null;
 $dataAuthor = null;
 $no = 1;
 
+//menampilkan data buku
 while (list($id, $judul, $penerbit, $deskripsi, $status, $id_author) = $buku->getResult()) {
     if ($status == "Best Seller") {
         $data .= "<tr>
@@ -72,6 +73,7 @@ while (list($id, $judul, $penerbit, $deskripsi, $status, $id_author) = $buku->ge
     }
 }
 
+//untuk option dalam form
 while (list($id, $nama, $status) = $author->getResult()) {
     $dataAuthor .= "<option value='".$id."'>".$nama."</option>
                 ";
