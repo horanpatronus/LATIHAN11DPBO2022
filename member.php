@@ -17,7 +17,7 @@ if (isset($_POST['add'])) {
 
 //mengecek apakah ada id_hapus, jika ada maka memanggil fungsi delete
 if (!empty($_GET['id_hapus'])) {
-    //memanggil add
+    //memanggil delete
     $id = $_GET['id_hapus'];
 
     $member->delete($id);
@@ -26,8 +26,8 @@ if (!empty($_GET['id_hapus'])) {
 
 $data_input = null;
 
+//jika tombol update tidak ditekan 
 if (empty($_GET['id_edit'])) {
-    
     $data_input .= "<h2 class='card-title'>Add Member</h2>
                     <form action='member.php' method='POST'>
                         <div class='form-row'>
@@ -49,12 +49,10 @@ if (empty($_GET['id_edit'])) {
 
                         <button type='submit' name='add' class='btn btn-primary mt-3'>Add</button>
                     </form>";
-
-    // header("location:member.php");
 }
 
+//jika tombol update ditekan
 if (!empty($_GET['id_edit'])) {
-    //memanggil add
     $nim = $_GET['id_edit'];
 
     $member->getMemberByNIM($nim);
@@ -81,12 +79,10 @@ if (!empty($_GET['id_edit'])) {
 
                         <button type='submit' name='update' class='btn btn-primary mt-3'>Update</button>
                     </form>";
-
-    // header("location:member.php");
 }
 
 if (isset($_POST['update'])) {
-    //memanggil add
+    //memanggil update
     $member->update($_POST);
     header("location:member.php");
 }
@@ -95,6 +91,7 @@ $data = null;
 $no = 1;
 $member->getMember();
 
+//menampilkan data
 while (list($nim, $nama, $jurusan) = $member->getResult()) {
     $data .= "<tr>
         <td>" . $no++ . "</td>
@@ -107,7 +104,6 @@ while (list($nim, $nama, $jurusan) = $member->getResult()) {
         </td>
         </tr>";
 }
-
 
 $member->close();
 $tpl = new Template("templates/member.html");
