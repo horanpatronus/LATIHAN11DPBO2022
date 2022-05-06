@@ -21,23 +21,18 @@ $status = false;
 $alert = null;
 
 if (isset($_POST['add'])) {
-    //memanggil add
     $peminjaman->add($_POST);
     header("location:peminjaman.php");
 }
 
 if (!empty($_GET['id_hapus'])) {
-    //memanggil add
     $id = $_GET['id_hapus'];
-
     $peminjaman->delete($id);
     header("location:peminjaman.php");
 }
 
 if (!empty($_GET['id_edit'])) {
-    //memanggil add
     $id = $_GET['id_edit'];
-
     $peminjaman->statusPeminjaman($id);
     header("location:peminjaman.php");
 }
